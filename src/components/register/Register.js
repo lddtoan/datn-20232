@@ -12,7 +12,6 @@ function RegisterForm() {
     gender: '',
     dob: '',
     address: '',
-    avatar: null,
     avatarUrl: null
   });
 
