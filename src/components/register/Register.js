@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Register.css'; 
 import { useNavigate } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -67,7 +67,7 @@ function RegisterForm() {
     return formData.password.length >= 9 && formData.confirmPassword.length >= 9;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Kiểm tra mặt khẩu
@@ -81,18 +81,20 @@ function RegisterForm() {
       return;
     }
 
-    /*
     try {
-      const response = await axios.post('/api/users', formData);
-      console.log(response.data); // In ra kết quả từ backend
-      alert('Bạn đã đăng ký thành công');
-      navigate('login'); // Chuyển hướng sau khi đăng ký thành công
+      console.log('form data: ', formData)
+      const response = await axios.post('http://localhost:8080/api/users', formData);
+      console.log("data: ",response.data); // In ra kết quả từ backend
+      if(response.data) {
+        alert('Bạn đã đăng ký thành công');
+      }
+      navigate('/login'); // Chuyển hướng sau khi đăng ký thành công
     } catch (error) {
       console.error('Error:', error);
       alert('Đã xảy ra lỗi khi đăng ký');
     }
-    */
   };
+
 
   const navigate = useNavigate()
 
