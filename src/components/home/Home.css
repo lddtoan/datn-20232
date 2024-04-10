@@ -1,0 +1,88 @@
+body {
+    background: linear-gradient(90deg, rgb(147, 215, 255),rgb(0, 162, 255)); 
+    margin: 0; 
+    padding: 0; 
+}
+
+div {
+    display: block;
+    unicode-bidi: isolate;
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 5px 7px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); 
+
+}
+
+.logo {
+    height: 75px;
+    width: auto;
+    cursor: pointer;
+}
+
+.menu-list {
+    list-style: none;
+    margin-right: 100px;
+    padding: 0;
+    text-align: right; 
+}
+
+.menu-list li {
+    display: inline-block;
+    margin-left: 50px;
+    border-right: 1px solid #ccc; 
+    padding-right: 50px; 
+    transition: color 0.3s; 
+}
+
+.link:hover{
+    color: orange;
+}
+
+.menu-list li:last-child {
+    border-right: none; /* Loại bỏ viền màu xám của mục menu cuối cùng */
+}
+
+.menu-list li a {
+    color:rgb(60, 217, 217);
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none; 
+}
+
+#title {
+    text-align: center;
+    margin-top: 1em;
+    color: black;
+    font-size: 24px;
+    line-height: 25px;
+    padding: 2px 0 15px 0;
+    font-weight: normal;
+    font-family: inherit;
+}
+
+.left-content {
+    float: left;
+    width: 75%;
+    box-sizing: border-box;
+}
+
+.purpose {
+    margin-top: 50px;
+}
+
+.right-content {
+    margin-bottom: 100px;
+    float: right;
+    width: 25%;
+    box-sizing: border-box;
+}

@@ -1,0 +1,168 @@
+@font-face {
+    font-family: 'Lato';
+    src: url(../../asset/Lato-Medium_0.ttf);
+}
+
+.wpforo-category {
+    margin-left: 10px;
+    margin-bottom: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    background-color: #43a6df;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    float: none;
+}
+
+.wpforo-cat-panel {
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 10px 6px 20px;
+    border-radius: 0 0 20px 0;
+}
+
+.cat-title {
+    color: #fff;
+    text-align: left;
+    padding: 5px 10px 5px 0;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: default;
+}
+
+span.cat-name {
+    font-size: 20px;
+    font-family: system-ui;
+}
+
+.cat-icon {
+    margin-right: 10px;
+}
+
+.forum-topic {
+    display: block;
+    width: 100%;
+    margin-left: 10px; 
+}
+
+.forum-topic-list {
+    display: flex;
+    justify-content: space-between;
+    align-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.topic-item {
+    width: 50%;
+    min-width: 200px;
+    padding: 7px 5px 5px 15px;
+    margin-top: 3px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-grow: 1;
+}
+
+.topic-item a {
+    font-weight: 500;
+    color: #555555;
+    font-family: "Lato", sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    text-decoration: none;
+    direction: ltr;
+    unicode-bidi: embed;
+    border: none;
+    cursor: pointer;
+}
+
+.topic-item a:hover {
+    color: #2d84e7;
+}
+
+.forum-topic-list > .topic-item {
+    background-color: #f5f5f5;
+}
+
+.topic-item-icon {
+    margin-right: 7px;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    font-size: 20px;
+    display: inline-flex;
+}
+
+.topic-item:nth-child(even){
+    border-left: 3px solid #ffffff;
+}
+
+.topic-item:nth-child(2n){
+    border-left: none !important;
+}
+
+.item1 {
+    color: #00c62b; 
+}
+
+.item2 {
+    color: #a041e4;
+}
+
+.item3 {
+    color: #096efb;
+}
+
+.item4 {
+    color: #26713c;
+}
+
+.item5 {
+    color: #faf60e;
+    font-size: 17px;
+}
+
+.item6 {
+    color:red;
+}
+
+.item7 {
+    color: green;
+}
+
+.item8 {
+    color: orange;
+}
+
+.item9 {
+    color: rgb(109, 0, 252);
+    font-size: 17px;
+}
+
+.item10 {
+    color: rgb(112, 112, 112);
+}
+
+.item11 {
+    color: rgb(255, 0, 132);
+    font-size: 17px;
+}
+
+.item12 {
+    color: rgb(230, 192, 55);
+}
+
+.item13 {
+    color: rgb(246, 92, 112);
+}
+
+.item14 {
+    color: rgb(66, 215, 252);
+}

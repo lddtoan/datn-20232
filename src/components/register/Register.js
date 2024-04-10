@@ -157,6 +157,7 @@ function RegisterForm() {
           <button type="submit">Đăng ký</button>
         </form>
         <div className="logIn">Bạn đã có tài khoản ? <span onClick={()=>navigate('login')}>Đăng nhập ngay !</span></div>
+        <div className="home">Quay về diễn đàn chính?<span onClick={() => navigate('/')}> Trang chủ</span></div>
       </div>
     </div>
   );

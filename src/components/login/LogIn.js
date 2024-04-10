@@ -46,7 +46,8 @@ function LogInForm() {
           <button type="submit">Đăng nhập</button>
         </form>
 
-        <div className="register">Chưa có tài khoản? <span onClick={() => navigate('/')}>Đăng ký ngay !</span></div>
+        <div className="register">Chưa có tài khoản? <span onClick={() => navigate('/register')}>Đăng ký ngay !</span></div>
+        <div className="home">Quay về diễn đàn chính?<span onClick={() => navigate('/')}> Trang chủ</span></div>
       </div>
     </div>
   );

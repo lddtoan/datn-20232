@@ -90,4 +90,20 @@ button[type="submit"]:active {
 .register span:hover {
     text-decoration: underline;
 }
+
+.home {
+    margin-top: 5px;
+}
+
+.home span{
+    font-weight: bold;
+    font-style: italic;
+    color: green; 
+    cursor: pointer;
+}
+
+.home span:hover {
+    text-decoration: underline;
+}
+  
   
