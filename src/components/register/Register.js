@@ -88,13 +88,11 @@ function RegisterForm() {
       if(response.data) {
         alert('Bạn đã đăng ký thành công');
       }
-      navigate('/login'); // Chuyển hướng sau khi đăng ký thành công
     } catch (error) {
       console.error('Error:', error);
       alert('Đã xảy ra lỗi khi đăng ký');
     }
   };
-
 
   const navigate = useNavigate()
 
@@ -159,7 +157,7 @@ function RegisterForm() {
           <button type="submit">Đăng ký</button>
         </form>
         <div className="logIn">Bạn đã có tài khoản ? <span onClick={()=>navigate('login')}>Đăng nhập ngay !</span></div>
-        <div className="home">Quay về diễn đàn chính?<span onClick={() => navigate('/')}> Trang chủ</span></div>
+        <div className="home">Quay về diễn đàn chính?<span onClick={()=>navigate('/')}> Trang chủ</span></div>
       </div>
     </div>
   );

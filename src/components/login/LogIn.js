@@ -35,7 +35,7 @@ function LogInForm() {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="inputBox">
-            <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Tên người dùng" required />
+            <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Tên người dùng hoặc email" required />
           </div>
 
           <div className="inputBox">

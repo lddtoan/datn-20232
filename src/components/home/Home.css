@@ -5,7 +5,6 @@ body {
 }
 
 div {
-    display: block;
     unicode-bidi: isolate;
     font-family: inherit;
     font-style: inherit;
@@ -28,7 +27,7 @@ div {
     width: auto;
     cursor: pointer;
 }
-
+  
 .menu-list {
     list-style: none;
     margin-right: 100px;
@@ -36,27 +35,31 @@ div {
     text-align: right; 
 }
 
-.menu-list li {
+.menu-list:last-child {
+    margin-right: 30px;
+}
+
+.menu-list .link {
     display: inline-block;
-    margin-left: 50px;
+    margin-left: 30px;
     border-right: 1px solid #ccc; 
-    padding-right: 50px; 
+    padding-right: 30px; 
     transition: color 0.3s; 
 }
 
-.link:hover{
-    color: orange;
-}
-
-.menu-list li:last-child {
+.menu-list .link:last-child {
     border-right: none; /* Loại bỏ viền màu xám của mục menu cuối cùng */
 }
 
-.menu-list li a {
+.menu-list .link a {
     color:rgb(60, 217, 217);
     font-size: 18px;
     font-weight: bold;
     text-decoration: none; 
+}
+
+a.nav:hover {
+    color: orange;
 }
 
 #title {
@@ -81,8 +84,8 @@ div {
 }
 
 .right-content {
-    margin-bottom: 100px;
     float: right;
-    width: 25%;
+    width: 17%;
     box-sizing: border-box;
+    margin-right: 50px;
 }

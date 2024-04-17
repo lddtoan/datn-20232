@@ -22,7 +22,7 @@ app.post('/api/users', (req, res) => {
     try {
         const formData = req.body;
         console.log('form: ', formData)
-        connection.query(`INSERT INTO users (username, fullname, email, password, gender,dob, address,avatar, avatarUrl) VALUES ('${formData.username}', '${formData.fullname}', '${formData.email}', '${formData.password}', '${formData.gender}','${formData.dob}','${formData.address}','${formData.avatar}','${formData.avatarUrl}')`, (err, result) => {
+        connection.query(`INSERT INTO users (username, fullname, email, password, gender, dob, address, avatarUrl) VALUES ('${formData.username}', '${formData.fullname}', '${formData.email}', '${formData.password}', '${formData.gender}', '${formData.dob}', '${formData.address}', '${formData.avatarUrl}')`, (err, result) => {
         if (err) {
             console.error('Lỗi kết nối dữ liệu:', err);
             res.status(500).send('Internal Server Error');
@@ -35,25 +35,14 @@ app.post('/api/users', (req, res) => {
     catch(err){
         console.log(err)
     }});
+    
+app.post('api/login', (req, res) => {
 
-//     // connection.query('INSERT INTO users VALUES ?', formData, (err, result) => {
-//     //     if (err) {
-//     //         console.error('Lỗi kết nối dữ liệu:', err);
-//     //         res.status(500).send('Internal Server Error');
-//     //     } else {
-//     //         console.log('Người dùng được tạo:', result.insertId);
-//     //         res.status(200).send('Thêm mới người dùng thành công');
-//     //     }
-//     // });
-// });
+})
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World!')
-//   })
-  
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-  });
+app.listen(port, () => {
+    console.log(`App listening on port ${port}`)
+});
  
 
 

@@ -4,6 +4,7 @@ import logo from '../../asset/psychological.jpg';
 import { useNavigate } from 'react-router-dom';
 import Topic from "./Topic.js";
 import Purpose from "./Purpose.js";
+import Search from "./Search.js";
 
 const Home = () => {
     const navigate = useNavigate(); 
@@ -19,9 +20,9 @@ const Home = () => {
                     <img src={logo} alt="Diễn đàn tân lý" className="logo"></img>                    
                 </div>
                 <ul className="menu-list">
-                    <li className="link"><a href="/">Trang chủ</a></li>
-                    <li className="link"><a href="/login">Đăng nhập/Đăng ký</a></li>
-                    <li className="link"><a href="/contact">Liên hệ</a></li>
+                    <li className="link"><a href="/" className="nav">Trang chủ</a></li>
+                    <li className="link"><a href="/login" className="nav">Đăng nhập/Đăng ký</a></li>
+                    <li className="link"><a href="/contact" className="nav">Liên hệ</a></li>
                 </ul>
             </div>
 
@@ -37,12 +38,7 @@ const Home = () => {
 
             <div className="right-content">
                 <div className="search">
-                    <h3 className="search-title">Tìm kiếm</h3>
-                <div className="search-box">
-                    <form>
-                       <input type="text" placeholder="Tìm kiếm..." className="search-input" value=""/>
-                    </form>
-                </div>
+                    <Search />
                 </div>
 
             </div> 
