@@ -1,48 +1,44 @@
-// npm install mysql2
 const express = require('express');
 const bodyParser = require('body-parser');
-const mysql = require('mysql2')
+const mysql = require('mysql2');
 const cors = require('cors');
+const bcrypt = require('bcrypt'); // For password hashing
 const app = express();
-const port = 8080;
+const port = 8080; 
 
-const connection = mysql.createConnection({
+const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'user'
 });
-connection.connect();
+db.connect();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-// // Endpoint API để nhận dữ liệu từ frontend và chèn vào database
-app.post('/api/users', (req, res) => {
+
+app.post('/api/users', async (req, res) => {
     try {
         const formData = req.body;
-        console.log('form: ', formData)
-        connection.query(`INSERT INTO users (username, fullname, email, password, gender, dob, address, avatarUrl) VALUES ('${formData.username}', '${formData.fullname}', '${formData.email}', '${formData.password}', '${formData.gender}', '${formData.dob}', '${formData.address}', '${formData.avatarUrl}')`, (err, result) => {
-        if (err) {
-            console.error('Lỗi kết nối dữ liệu:', err);
-            res.status(500).send('Internal Server Error');
-        } else {
-            console.log('Người dùng được tạo:', result.insertId);
-            res.status(200).send('Thêm mới người dùng thành công');
-        }
-    });
+        // Hash password before saving to database
+        const hashedPassword = await bcrypt.hash(formData.password, 10);
+        const query = `INSERT INTO users (username, fullname, email, password, gender, dob, address, avatarUrl) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+        db.query(query, [formData.username, formData.fullname, formData.email, hashedPassword, formData.gender, formData.dob, formData.address, formData.avatarUrl], (err, result) => {
+            if (err) {
+                console.error('Error connecting to database:', err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                console.log('User created:', result.insertId);
+                res.status(200).send('New user created successfully');
+            }
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).send('Internal Server Error');
     }
-    catch(err){
-        console.log(err)
-    }});
-    
-app.post('api/login', (req, res) => {
-
-})
+});
 
 app.listen(port, () => {
-    console.log(`App listening on port ${port}`)
+    console.log(`App listening on port ${port}`);
 });
- 
-
-

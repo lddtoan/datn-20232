@@ -168,10 +168,11 @@ button[type="submit"]:active {
 }
 
 .avatar-preview {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%; 
     overflow: hidden; 
+    margin-top: 20px;
 }
   
 .avatar-image {

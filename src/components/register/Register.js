@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Register.css'; 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Avatar from '../../asset/unknown-user.jpg'
 
 function RegisterForm() {
   const [formData, setFormData] = useState({
@@ -39,16 +40,22 @@ function RegisterForm() {
     setFormData({ ...formData, [name]: value });
   };
 
+  const defaultAvatarUrl = Avatar;
+
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setFormData({ ...formData, avatar: file });
-    
-    // Hiển thị ảnh trước khi tải lên
-    const reader = new FileReader();
-    reader.onload = function(event) {
-      setFormData({ ...formData, avatarUrl: event.target.result });
-    };
-    reader.readAsDataURL(file);
+    if (file) {
+      setFormData({ ...formData, avatar: file });
+      
+      // Hiển thị ảnh trước khi tải lên
+      const reader = new FileReader();
+      reader.onload = function(event) {
+        setFormData({ ...formData, avatarUrl: event.target.result });
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFormData({ ...formData, avatarUrl: defaultAvatarUrl });
+    }
   };
 
   const handleTogglePassword = () => {
@@ -82,17 +89,18 @@ function RegisterForm() {
     }
 
     try {
-      console.log('form data: ', formData)
-      const response = await axios.post('http://localhost:8080/api/users', formData);
-      console.log("data: ",response.data); // In ra kết quả từ backend
-      if(response.data) {
-        alert('Bạn đã đăng ký thành công');
+      const registerResponse = await axios.post('http://localhost:8080/api/users', formData);
+      console.log("data: ", registerResponse.data); // In ra kết quả từ backend
+      if (registerResponse.data && registerResponse.data.message === 'New user created successfully') {
+          console.log('OK');
+      } else {
+          alert('Bạn đã đăng ký thành công');
       }
     } catch (error) {
-      console.error('Error:', error);
-      alert('Đã xảy ra lỗi khi đăng ký');
-    }
-  };
+        console.error('Error:', error);
+        alert('Đã xảy ra lỗi khi đăng ký');
+    }    
+};
 
   const navigate = useNavigate()
 
@@ -147,11 +155,15 @@ function RegisterForm() {
             <label htmlFor="avt">Avatar</label>
             <input type="file" id="avatar" name="avatar" onChange={handleFileChange} accept="image/*" />
             {/* Hiển thị ảnh trước khi tải lên */}
-            {formData.avatarUrl && (
-              <div className="avatar-preview">
-                <img src={formData.avatarUrl} alt="Avatar Preview" className="avatar-image" />
-              </div>
-             )}
+            {formData.avatarUrl ? (
+            <div className="avatar-preview">
+              <img src={formData.avatarUrl} alt="Avatar Preview" className="avatar-image" />
+            </div>
+            ) : (
+            <div className="avatar-preview">
+              <img src={defaultAvatarUrl} alt="Default Avatar" className="avatar-image" />
+            </div>
+            )}
           </div>
 
           <button type="submit">Đăng ký</button>

@@ -3,7 +3,7 @@ import './LogIn.css';
 import { useNavigate } from 'react-router-dom';
 
 function LogInForm() {
-  const [formData, setFormData] = useState({
+  const [formLogin, setformLogin] = useState({
     username: '',
     password: ''
   });
@@ -12,7 +12,7 @@ function LogInForm() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setformLogin({ ...formLogin, [name]: value });
   };
 
   const handleTogglePassword = () => {
@@ -21,8 +21,6 @@ function LogInForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData);
-    // Continue with form submission logic here
   };
 
   const navigate = useNavigate()
@@ -35,11 +33,11 @@ function LogInForm() {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="inputBox">
-            <input type="text" id="username" name="username" value={formData.username} onChange={handleChange} placeholder="Tên người dùng hoặc email" required />
+            <input type="text" id="username" name="username" value={formLogin.username} onChange={handleChange} placeholder="Tên người dùng hoặc email" required />
           </div>
 
           <div className="inputBox">
-            <input type={showPassword ? 'text' : 'password'} id="password" name="password" value={formData.password} onChange={handleChange} placeholder="Mật khẩu" required />
+            <input type={showPassword ? 'text' : 'password'} id="password" name="password" value={formLogin.password} onChange={handleChange} placeholder="Mật khẩu" required />
             <button type="button" onClick={handleTogglePassword}>{showPassword ? 'Ẩn' : 'Hiện'}</button>
           </div>
 

@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import Topic from "./Topic.js";
 import Purpose from "./Purpose.js";
 import Search from "./Search.js";
+import RecentPost from "./RecentPost.js";
+import RecentActivity from "./RecentActivity.js";
 
 const Home = () => {
     const navigate = useNavigate(); 
@@ -34,16 +36,20 @@ const Home = () => {
                 <div className="purpose">
                     <Purpose />
                 </div>
+                <div className="recent-post">
+                    <RecentPost />
+                </div>
             </div>
 
             <div className="right-content">
                 <div className="search">
                     <Search />
                 </div>
-
+                <div className="recent-activity">
+                    <RecentActivity />
+                </div>
             </div> 
-        </div>    
-        
+        </div>            
     );
 }
 
