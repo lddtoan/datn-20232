@@ -99,7 +99,7 @@ function RegisterForm() {
       } catch (error) {
           console.error('Error:', error);
           if (error.response && error.response.status === 500) { // Kiểm tra nếu lỗi là do trùng lặp
-              alert('Username hoặc email đã tồn tại.');
+              alert('Username hoặc email đã tồn tại. Vui lòng thử lại nhé');
           } else {
               alert('Đã xảy ra lỗi khi đăng ký');
           }
