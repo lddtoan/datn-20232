@@ -89,17 +89,21 @@ function RegisterForm() {
     }
 
     try {
-      const registerResponse = await axios.post('http://localhost:8080/api/users', formData);
-      console.log("data: ", registerResponse.data); // In ra kết quả từ backend
-      if (registerResponse.data && registerResponse.data.message === 'New user created successfully') {
-          console.log('OK');
-      } else {
-          alert('Bạn đã đăng ký thành công');
+        const registerResponse = await axios.post('http://localhost:8080/api/users', formData);
+        console.log("data: ", registerResponse.data); // In ra kết quả từ backend
+        if (registerResponse.data && registerResponse.data.message === 'New user created successfully') {
+            console.log('OK');
+        } else {
+            alert('Bạn đã đăng ký thành công');
+        }
+      } catch (error) {
+          console.error('Error:', error);
+          if (error.response && error.response.status === 500) { // Kiểm tra nếu lỗi là do trùng lặp
+              alert('Username hoặc email đã tồn tại.');
+          } else {
+              alert('Đã xảy ra lỗi khi đăng ký');
+          }
       }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Đã xảy ra lỗi khi đăng ký');
-    }    
 };
 
   const navigate = useNavigate()

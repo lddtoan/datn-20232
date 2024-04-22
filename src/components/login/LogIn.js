@@ -9,6 +9,8 @@ function LogInForm() {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,11 +21,41 @@ function LogInForm() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-  };
 
-  const navigate = useNavigate()
+    const response = await fetch('http://localhost:8080/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: formLogin.username })
+    });
+    const data = await response.json();
+
+    if (!data.exists) {
+      setErrorMessage('Tài khoản không tồn tại.');
+      return;
+    }
+
+    // Kiểm tra xem password có khớp với username hoặc email đã cho hay không
+    const loginResponse = await fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username: formLogin.username, password: formLogin.password })
+    });
+    const loginData = await loginResponse.json();
+
+    if (loginData.error) {
+      setErrorMessage('Sai mật khẩu.');
+      return;
+    }
+
+    // Nếu thông tin đăng nhập chính xác, chuyển sang component khác
+    navigate('/home');
+  };
 
   return (
     <div className="container">
@@ -43,6 +75,8 @@ function LogInForm() {
 
           <button type="submit">Đăng nhập</button>
         </form>
+
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
 
         <div className="register">Chưa có tài khoản? <span onClick={() => navigate('/register')}>Đăng ký ngay !</span></div>
         <div className="home">Quay về diễn đàn chính?<span onClick={() => navigate('/')}> Trang chủ</span></div>
