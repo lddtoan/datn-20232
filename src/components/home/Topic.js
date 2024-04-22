@@ -51,7 +51,7 @@ const Topic = () => {
                                 <span className="topic-item-icon">
                                     <FontAwesomeIcon className = "item5" icon={faUserGroup} />
                                 </span>
-                                <a href="/">Các mối quan hệ bạn bè và gia đình</a>   
+                                <a href="/">Các mối quan hệ bạn bè, gia đình, xã hội</a>   
                             </div>
 
                             <div className="topic-item">                    

@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 function LogInForm() {
   const [formLogin, setformLogin] = useState({
-    username: '',
+    username_or_email: '',
     password: ''
   });
 
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,38 +23,29 @@ function LogInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch('http://localhost:8080/api/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username: formLogin.username })
-    });
-    const data = await response.json();
+    try {
+      const response = await fetch('/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formLogin)
+      });
 
-    if (!data.exists) {
-      setErrorMessage('Tài khoản không tồn tại.');
-      return;
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(errorMessage);
+      }
+
+      // Nếu thông tin đăng nhập hợp lệ, chuyển hướng đến component khác
+      navigate('/home');
+    } catch (error) {
+      // Xử lý lỗi khi thông tin đăng nhập không hợp lệ
+      setError(error.message);
     }
-
-    // Kiểm tra xem password có khớp với username hoặc email đã cho hay không
-    const loginResponse = await fetch('http://localhost:8080/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ username: formLogin.username, password: formLogin.password })
-    });
-    const loginData = await loginResponse.json();
-
-    if (loginData.error) {
-      setErrorMessage('Sai mật khẩu.');
-      return;
-    }
-
-    // Nếu thông tin đăng nhập chính xác, chuyển sang component khác
-    navigate('/home');
   };
+
+  const navigate = useNavigate();
 
   return (
     <div className="container">
@@ -65,7 +55,7 @@ function LogInForm() {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="inputBox">
-            <input type="text" id="username" name="username" value={formLogin.username} onChange={handleChange} placeholder="Tên người dùng hoặc email" required />
+            <input type="text" id="username_or_email" name="username_or_email" value={formLogin.username_or_email} onChange={handleChange} placeholder="Tên người dùng hoặc email" required />
           </div>
 
           <div className="inputBox">
@@ -76,7 +66,7 @@ function LogInForm() {
           <button type="submit">Đăng nhập</button>
         </form>
 
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+        {error && <div className="error">{error}</div>}
 
         <div className="register">Chưa có tài khoản? <span onClick={() => navigate('/register')}>Đăng ký ngay !</span></div>
         <div className="home">Quay về diễn đàn chính?<span onClick={() => navigate('/')}> Trang chủ</span></div>
