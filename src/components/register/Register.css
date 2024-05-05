@@ -147,7 +147,7 @@ button[type="submit"]:active {
     transform: scale(0.9);
 }
 
-.logIn {
+.login {
     position: relative;
     width: 300px;
     padding-top: 20px;
@@ -155,7 +155,7 @@ button[type="submit"]:active {
     font-family: Arial, sans-serif;
 }
 
-.logIn span {
+.login span {
     font-weight: bold;
     font-style: italic; 
     color: blue;
@@ -163,7 +163,7 @@ button[type="submit"]:active {
     text-decoration: none;
 }
 
-.logIn span:hover {
+.login span:hover {
     text-decoration: underline;
 }
 

@@ -1,0 +1,151 @@
+@font-face {
+    font-family: 'Lato';
+    src: url(../../../asset/Lato-Medium_0.ttf);
+}
+
+body {
+    background: linear-gradient(90deg, rgb(147, 215, 255),rgb(0, 162, 255)); 
+    margin: 0; 
+    padding: 0; 
+}
+
+div {
+    unicode-bidi: isolate;
+    font-family: inherit;
+    font-style: inherit;
+    font-weight: inherit;
+    vertical-align: baseline;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    padding: 5px 7px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); 
+}
+
+.logo {
+    height: 75px;
+    width: auto;
+    cursor: pointer;
+}
+  
+.menu-list {
+    list-style: none;
+    margin-right: 100px;
+    padding: 0;
+    text-align: right; 
+}
+
+.menu-list:last-child {
+    margin-right: 5px;
+}
+
+.menu-list .link {
+    display: inline-block;
+    margin-left: 30px;
+    border-right: 1px solid #ccc; 
+    padding-right: 30px; 
+    transition: color 0.3s; 
+}
+
+.menu-list .link:last-child {
+    border-right: none; /* Loại bỏ viền màu xám của mục menu cuối cùng */
+}
+
+.menu-list .link a {
+    color:rgb(60, 217, 217);
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none; 
+}
+
+a.nav:hover {
+    color: orange;
+}
+
+.left-content {
+    margin: 15px;
+    float: left;
+    width: 70%;
+    box-sizing: border-box;
+}
+
+.right-content {
+    float: right;
+    width: 20%;
+    box-sizing: border-box;
+    margin-right: 50px;
+}
+
+.recent-activity {
+    margin-top: 50px;
+}
+
+.topic-bar {
+    background: linear-gradient(90deg, #00c62b, white);
+    padding: 10px 20px;
+    margin-bottom: 50px;
+    border-left: 5px solid #00c62b;
+}
+
+#topic-title {
+    color: #00c62b;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Lato", sans-serif;
+    line-height: 50px;
+}
+
+.topic-header {
+    background-color: #43a6df;
+    font-size: 14px;
+    padding: 7px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    width: 100%;
+    min-height: 35px;
+}
+
+.topic-infor {
+    border-right: 1px solid white;
+}
+
+.topic-header .topic-infor {
+    float: left;
+    font-size: 16px;
+    text-align: center !important;
+    color: white;
+}
+
+.topic-infor.author {
+    width: 15%;
+}
+
+.topic-infor.title {
+    width: 40%;
+}
+
+.topic-infor.purpose {
+    width: 20%;
+    margin-top: 0px;
+}
+
+.topic-infor.like {
+    width: 10%;
+}
+
+.topic-infor.comment {
+    width: 20%;
+}
+
+.topic-infor.time {
+    width: 20%;
+    border-right: none;
+}

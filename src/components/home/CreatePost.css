@@ -1,0 +1,19 @@
+@font-face {
+    font-family: 'Lato';
+    src: url(../../asset/Lato-Medium_0.ttf);
+}
+
+.create-bar {
+    background-color: rgb(189, 240, 240);
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+#create-title {
+    color: rgb(93, 92, 92);
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Lato", sans-serif;
+    line-height: 50px;
+}

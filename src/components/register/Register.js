@@ -91,7 +91,7 @@ function RegisterForm() {
     try {
         const registerResponse = await axios.post('http://localhost:8080/api/users', formData);
         console.log("data: ", registerResponse.data); // In ra kết quả từ backend
-        if (registerResponse.data && registerResponse.data.message === 'New user created successfully') {
+        if (registerResponse.data && registerResponse.data.message === 'Tạo mới người dùng thành công !') {
             console.log('OK');
         } else {
             alert('Bạn đã đăng ký thành công');
@@ -172,7 +172,7 @@ function RegisterForm() {
 
           <button type="submit">Đăng ký</button>
         </form>
-        <div className="logIn">Bạn đã có tài khoản ? <span onClick={()=>navigate('login')}>Đăng nhập ngay !</span></div>
+        <div className="login">Bạn đã có tài khoản ? <span onClick={()=>navigate('/login')}>Đăng nhập ngay !</span></div>
         <div className="home">Quay về diễn đàn chính?<span onClick={()=>navigate('/')}> Trang chủ</span></div>
       </div>
     </div>
