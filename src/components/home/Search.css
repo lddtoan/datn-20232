@@ -1,0 +1,49 @@
+@font-face {
+    font-family: 'Lato';
+    src: url(../../asset/Lato-Medium_0.ttf);
+}
+
+.search-title {
+    padding: 20px 0 15px 0;
+    margin-bottom: 5px;
+    font-size: 20px;
+    font-family: "Lato", sans-serif;
+    font-weight: normal;
+    border-bottom: 2px solid white;
+}
+
+.search-box {
+    margin-top: 10px;
+}
+
+.search-widget {
+    position: relative !important;
+    display: block !important;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.search-input[type="text"] {
+    position: relative !important;
+    display: block !important;
+    border: 5px solid #dadada;
+    padding: 7px 70px 7px 5px;
+    color: rgb(85, 247, 247);
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 16px;
+    font-family: "Lato", sans-serif;
+}
+
+.search-button {
+    margin-top: 4px;
+    background-color: yellowgreen;
+    border: none;
+    border-radius: 5px;
+    padding: 7px;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background-color: rgb(185, 236, 84);
+}
