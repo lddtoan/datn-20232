@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import './LogIn.css';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState } from "react";
+import "./LogIn.css";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function LoginForm() {
   const [formLogin, setFormLogin] = useState({
-    username_or_email: '',
-    password: ''
+    username_or_email: "",
+    password: "",
   });
 
   const [showPassword, setShowPassword] = useState(false);
@@ -19,7 +19,7 @@ function LoginForm() {
     const { name, value } = e.target;
     setFormLogin({
       ...formLogin,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -32,40 +32,73 @@ function LoginForm() {
     const { username_or_email, password } = formLogin;
 
     try {
-      const response = await axios.post('http://localhost:8080/api/login', { usernameOrEmail: username_or_email, password });
+      const response = await axios.post("http://localhost:8080/api/login", {
+        usernameOrEmail: username_or_email,
+        password,
+      });
       if (response.status === 200) {
-        alert('Đăng nhập thành công !');
-        navigate('/home')
+        alert("Đăng nhập thành công !");
+        navigate("/home");
       }
     } catch (error) {
-      console.error('Lỗi kết nối:', error);
-      setError(true)
+      console.error("Lỗi kết nối:", error);
+      setError(true);
     }
   };
-    
+
   return (
     <div className="container">
       <div className="login-form">
         <div className="title">
-          <h1><i>Đăng nhập</i></h1>
+          <h1>
+            <i>Đăng nhập</i>
+          </h1>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="inputBox">
-            <input type="text" id="username_or_email" name="username_or_email" value={formLogin.username_or_email} onChange={handleChange} placeholder="Tên người dùng hoặc email" required />
+            <input
+              type="text"
+              id="username_or_email"
+              name="username_or_email"
+              value={formLogin.username_or_email}
+              onChange={handleChange}
+              placeholder="Tên người dùng hoặc email"
+              required
+            />
           </div>
 
           <div className="inputBox">
-            <input type={showPassword ? 'text' : 'password'} id="password" name="password" value={formLogin.password} onChange={handleChange} placeholder="Mật khẩu" required />
-            <button type="button" onClick={handleTogglePassword}>{showPassword ? 'Ẩn' : 'Hiện'}</button>
+            <input
+              type={showPassword ? "text" : "password"}
+              id="password"
+              name="password"
+              value={formLogin.password}
+              onChange={handleChange}
+              placeholder="Mật khẩu"
+              required
+            />
+            <button type="button" onClick={handleTogglePassword}>
+              {showPassword ? "Ẩn" : "Hiện"}
+            </button>
           </div>
-          
-          {error && <div className="error-message">Bạn đã nhập sai thông tin. Vui lòng thử lại !</div>}
+
+          {error && (
+            <div className="error-message">
+              Bạn đã nhập sai thông tin. Vui lòng thử lại !
+            </div>
+          )}
 
           <button type="submit">Đăng nhập</button>
         </form>
 
-        <div className="register">Chưa có tài khoản? <span onClick={() => navigate('/register')}>Đăng ký ngay !</span></div>
-        <div className="home">Quay về diễn đàn chính?<span onClick={() => navigate('/')}> Trang chủ</span></div>
+        <div className="register">
+          Chưa có tài khoản?{" "}
+          <span onClick={() => navigate("/register")}>Đăng ký ngay !</span>
+        </div>
+        <div className="home">
+          Quay về diễn đàn chính?
+          <span onClick={() => navigate("/")}> Trang chủ</span>
+        </div>
       </div>
     </div>
   );

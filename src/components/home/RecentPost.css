@@ -1,103 +1,102 @@
 @font-face {
-    font-family: 'Lato';
-    src: url(../../asset/Lato-Medium_0.ttf);
+  font-family: "Lato";
+  src: url(../../asset/lato-medium.ttf);
 }
 
 div {
-    unicode-bidi: isolate;
-    font: inherit;
-    font-size: inherit;
-    font-family: inherit;
-    font-weight: inherit;
-    vertical-align: baseline;
-    box-sizing: border-box;
+  unicode-bidi: isolate;
+  font: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
 }
 
 .wpforo-category {
-    margin-left: 10px;
-    margin-bottom: 0;
-    border-bottom: 0;
-    border-radius: 0;
-    background-color: #43a6df;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    float: none;
+  margin-left: 10px;
+  margin-bottom: 0;
+  border-bottom: 0;
+  border-radius: 0;
+  background-color: #43a6df;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  float: none;
 }
 
 .wpforo-cat-panel {
-    width: 100%;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 10px 6px 20px;
-    border-radius: 0 0 20px 0;
+  width: 100%;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 10px 6px 20px;
+  border-radius: 0 0 20px 0;
 }
 
 .cat-title {
-    color: #fff;
-    text-align: left;
-    padding: 5px 10px 5px 0;
-    font-size: 20px;
-    font-weight: 600;
-    cursor: default;
+  color: #fff;
+  text-align: left;
+  padding: 5px 10px 5px 0;
+  font-size: 20px;
+  font-weight: 600;
+  cursor: default;
 }
 
 span.cat-name {
-    font-size: 20px;
-    font-family: system-ui;
+  font-size: 20px;
+  font-family: system-ui;
 }
 
 .cat-icon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .recent-post-header {
-    background-color: rgb(104, 193, 163);
-    font-size: 14px;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: flex-end;
-    width: 100%;
-    max-height: 44px;
+  background-color: rgb(104, 193, 163);
+  font-size: 14px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: 100%;
+  max-height: 44px;
 }
 
 .recent-post-header .recent-post-box {
-    color: white;
-    float: left;
-    font-size: 16px;
-    padding: 7px;
-    text-align: center !important;
-    border-right: 0.1px solid white;
+  color: white;
+  float: left;
+  font-size: 16px;
+  padding: 7px;
+  text-align: center !important;
+  border-right: 0.1px solid white;
 }
 
 .recent-post-box.author {
-    width: 12%;
+  width: 12%;
 }
 
 .recent-post-box.title {
-    width: 33%;
+  width: 33%;
 }
 
 .recent-post-box.topic {
-    width: 22%;
+  width: 22%;
 }
 
 .recent-post-box.purpose {
-    width: 22%;
+  width: 22%;
 }
 
 .recent-post-box.like {
-    width: 7%;
+  width: 7%;
 }
 
 .recent-post-box.time {
-    width: 160px;
-    border-right: none;
+  width: 160px;
+  border-right: none;
 }
-

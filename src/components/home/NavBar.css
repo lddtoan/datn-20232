@@ -1,57 +1,57 @@
 div {
-    unicode-bidi: isolate;
-    font-family: inherit;
-    font-style: inherit;
-    font-weight: inherit;
-    vertical-align: baseline;
+  unicode-bidi: isolate;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+  vertical-align: baseline;
 }
 
 .nav {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #fff;
-    padding: 5px 7px;
-    box-shadow: none;    
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 5px 7px;
+  box-shadow: none;
 }
 
 .logo {
-    height: 75px;
-    width: auto;
-    cursor: pointer;
+  height: 75px;
+  width: auto;
+  cursor: pointer;
 }
-  
+
 .menu-list {
-    list-style: none;
-    margin-right: 100px;
-    padding: 0;
-    text-align: right; 
+  list-style: none;
+  margin-right: 100px;
+  padding: 0;
+  text-align: right;
 }
 
 .menu-list:last-child {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .menu-list .link {
-    display: inline-block;
-    margin-left: 30px;
-    border-right: 1px solid #ccc; 
-    padding-right: 30px; 
-    transition: color 0.3s; 
+  display: inline-block;
+  margin-left: 30px;
+  border-right: 1px solid #ccc;
+  padding-right: 30px;
+  transition: color 0.3s;
 }
 
 .menu-list .link:last-child {
-    border-right: none; /* Loại bỏ viền màu xám của mục menu cuối cùng */
+  border-right: none; /* Loại bỏ viền màu xám của mục menu cuối cùng */
 }
 
 .menu-list .link a {
-    color:rgb(60, 217, 217);
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none; 
+  color: rgb(60, 217, 217);
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 a.nav:hover {
-    color: orange;
+  color: orange;
 }

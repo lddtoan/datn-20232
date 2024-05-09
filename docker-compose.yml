@@ -1,0 +1,15 @@
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    env_file:
+      - .env.${MODE}
+    volumes:
+      - mysql:/var/lib/mysql
+      - ./src/backend/database.sql:/docker-entrypoint-initdb.d/database.sql
+    ports:
+      - ${DB_PORT}:3306
+
+volumes:
+  mysql:
