@@ -24,7 +24,6 @@ const Home = () => {
                 <ul className="menu-list">
                     <li className="link"><a href="/" className="nav">Trang chủ</a></li>
                     <li className="link"><a href="/login" className="nav">Đăng nhập/Đăng ký</a></li>
-                    <li className="link"><a href="/contact" className="nav">Liên hệ</a></li>
                 </ul>
             </div>
 

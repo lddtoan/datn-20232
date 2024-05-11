@@ -16,6 +16,8 @@ div {
 }
 
 .left-content {
+    margin-top: 15px;
+    margin-left: 15px;
     float: left;
     width: 75%;
     box-sizing: border-box;

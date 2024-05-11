@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import './LogIn.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import googlebutton from '../../asset/googlebutton.jpg'
+
+function Navigrate(url){
+  window.location.href = url;
+}
+
+async function auth(){
+  const respone = await fetch('http://127.0.0.1:3000/request',{method:'post'});
+  const data = await respone.json();
+  Navigrate(data.url);
+}
 
 function LoginForm() {
   const [formLogin, setFormLogin] = useState({
@@ -56,10 +67,13 @@ function LoginForm() {
 
           <div className="inputBox">
             <input type={showPassword ? 'text' : 'password'} id="password" name="password" value={formLogin.password} onChange={handleChange} placeholder="Mật khẩu" required />
-            <button type="button" onClick={handleTogglePassword}>{showPassword ? 'Ẩn' : 'Hiện'}</button>
+            <button type="button" id="show" onClick={handleTogglePassword}>{showPassword ? 'Ẩn' : 'Hiện'}</button>
           </div>
           
           {error && <div className="error-message">Bạn đã nhập sai thông tin. Vui lòng thử lại !</div>}
+          <div onClick={() => auth()}>
+            <img src={googlebutton} className='google' alt='Google Sign-in'></img>
+          </div>
 
           <button type="submit">Đăng nhập</button>
         </form>

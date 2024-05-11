@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import './CreatePost.css';
 import logo from '../../asset/psychological.jpg';
 import { useNavigate } from 'react-router-dom';
-import Search from "../home/Search";
-import RecentActivity from "../home/RecentActivity";
+import Search from "./Search";
+import RecentActivity from "./RecentActivity";
 import axios from "axios";
 
 const CreatePost = () => {
@@ -69,6 +69,7 @@ const CreatePost = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        alert("Bạn đã đăng bài viết thành công !")
         try {
             const currentTime = getCurrentTime();
             setPostData({
@@ -165,20 +166,6 @@ const CreatePost = () => {
                             <input type="file" id="post-file" name="file" accept="image/*, video/*" onChange={handleFileChange} />
                         </div>
                         
-                         {
-                            <div className="uploaded-media">
-                                {postData.imageURL && (
-                                    <img src={postData.imageURL} alt="Hình ảnh"/>
-                                )}
-                                {postData.videoURL && (
-                                    <video controls>
-                                        <source src={postData.videoURL} type="video/mp4" />
-                                        Your browser does not support the video tag.
-                                    </video>
-                                )}
-                            </div>
-                            }
-
                         <button className="submit-post" type="submit">Đăng bài</button>
                     </form>
                 </div>
