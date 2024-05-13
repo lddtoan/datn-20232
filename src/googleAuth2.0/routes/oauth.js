@@ -5,7 +5,7 @@ dotenv.config();
 const {OAuth2Client} = require('google-auth-library')
 
 async function getUserData(access_token){
-    const respone = await fetch('https://www.googleapis.com/oauth2/v3/userinfo?acces_token${access_token}');
+    const respone = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?acces_token${access_token}`);
     const data = await respone.json();
     console.log('data', data); 
 }

@@ -64,7 +64,7 @@
     color: orange;
 }
 
-select {
+.post-topic select, .post-purpose select {
     font-weight: bold;
     height: 25px;
     padding-left: 5px;
@@ -72,17 +72,17 @@ select {
     font-family: "Lato", sans-serif;
 }
 
-option {
+.post-topic option .post-purpose option {
     font-weight: bold; 
     font-family: "Lato", sans-serif;
     color: orange;
 }
 
-select#topic:valid {
+.post-topic select#topic:valid {
     color: rgb(129, 211, 6);
 }
 
-select#purpose:valid {
+.post-purpose select#purpose:valid {
     color: rgb(0, 202, 221);
 }
 
