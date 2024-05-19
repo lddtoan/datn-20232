@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import './CreatePost.css';
-import logo from '../../asset/psychological.jpg';
-import { useNavigate } from 'react-router-dom';
 import Search from "./Search";
 import RecentActivity from "./RecentActivity";
+import NavBar from "./NavBar";
 import axios from "axios";
 
 const CreatePost = () => {
-    const navigate = useNavigate();
     const [postData, setPostData] = useState({
         title: '',
         content: '',
@@ -44,10 +42,6 @@ const CreatePost = () => {
         'Câu chuyện thường ngày & Tán gẫu'
     ];
 
-    const handleLogoClick = () => {
-        navigate('/home');
-    };
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setPostData({
@@ -62,7 +56,6 @@ const CreatePost = () => {
         return formattedTime;
     };
 
-
     const handleFileChange = (e) => {
         setSelectedFile(e.target.files[0]);
     };
@@ -70,58 +63,12 @@ const CreatePost = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         alert("Bạn đã đăng bài viết thành công !")
-        try {
-            const currentTime = getCurrentTime();
-            setPostData({
-                ...postData,
-                time: currentTime
-            });
-
-            // If a file is selected, upload it
-            if (selectedFile) {
-                const formData = new FormData();
-                formData.append('file', selectedFile);
-
-                // Send formData to server to upload file
-                const fileResponse = await axios.post('/api/upload', formData);
-                
-                // Determine if uploaded file is image or video and update the respective URL
-                const { fileType, fileURL } = fileResponse.data;
-                if (fileType.startsWith('image')) {
-                    setPostData({
-                        ...postData,
-                        imageURL: fileURL
-                    });
-                } else if (fileType.startsWith('video')) {
-                    setPostData({
-                        ...postData,
-                        videoURL: fileURL
-                    });
-                }
-            }
-            // Send other postData fields along with imageURL and videoURL to server
-            const response = await axios.post('/api/posts', postData);
-            console.log(response.data); 
-        } catch (error) {
-            console.error('Error:', error);
-            // Handle error
-        }
     };
     
     return (
         <div className="main-content">
             <div className="navbar">
-                <div className="logo-container" onClick={handleLogoClick}>
-                    <img src={logo} alt="Diễn đàn tân lý" className="logo"></img>                    
-                </div>
-                <ul className="menu-list">
-                    <li className="link"><a href="/home" className="nav">Trang chủ</a></li>
-                    <li className="link"><a href="/create-post" className="nav">Tạo bài viết</a></li>
-                    <li className="link"><a href="/info" className="nav">Hồ sơ cá nhân</a></li>
-                    <li className="link"><a href="/message" className="nav">Tin nhắn</a></li>
-                    <li className="link"><a href="/contact" className="nav">Liên hệ</a></li>
-                    <li className="link"><a href="/" className="nav">Đăng xuất</a></li>
-                </ul>
+                <NavBar />
             </div>
 
             <div className="left-content">

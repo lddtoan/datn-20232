@@ -9,7 +9,7 @@ function Navigrate(url){
 }
 
 async function auth(){
-  const respone = await fetch('http://127.0.0.1:3000/request',{method:'post'});
+  const respone = await fetch('http://localhost:8080/api/auth/google/callback',{method:'post'});
   const data = await respone.json();
   Navigrate(data.url);
 }
