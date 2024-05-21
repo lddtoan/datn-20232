@@ -5,6 +5,7 @@ const cors = require('cors');
 const app = express();
 const port = 8080; 
 const jwt = require('jsonwebtoken');
+const topicRoutes = require('./topicControl')
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -111,7 +112,6 @@ app.post('/api/add-post', authenticateJWT, (req, res) => {
     });
 });
 
-
 // Bài viết gần nhất
 app.get('/api/recent-posts', (req, res) => {
     // Lấy thời gian hiện tại của yêu cầu
@@ -134,6 +134,9 @@ app.get('/api/recent-posts', (req, res) => {
         });
     });
 });
+
+// API endpoint để lấy thông tin bài viết theo chủ đề
+app.use('/api/:topic', topicRoutes);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
