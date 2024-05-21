@@ -31,10 +31,10 @@ function Profile() {
 
   return (
     <div className="profile">
-      <h1>Profile</h1>
-      <p><strong>Username:</strong> {profile.username}</p>
-      <p><strong>Full Name:</strong> {profile.fullname}</p>
-      <img src={profile.avatarUrl} alt="Avatar" />
+        <h1>Profile</h1>
+        <p><strong>Username:</strong> {profile.username}</p>
+        <p><strong>Full Name:</strong> {profile.fullname}</p>
+        <img src={profile.avatarUrl} alt="Avatar" />
     </div>
   );
 }

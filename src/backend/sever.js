@@ -95,6 +95,46 @@ app.get('/api/protected-route', authenticateJWT, (req, res) => {
     res.status(200).json({ message: 'Bạn đã truy cập thành công vào route bảo vệ !', user: req.user });
 });
 
+// Endpoint API để thêm bài viết mới
+app.post('/api/add-post', authenticateJWT, (req, res) => {
+    const { title, content, topic, purpose, imageURL, videoURL } = req.body;
+    const userId = req.user.id; // Lấy id của người dùng từ JWT
+
+    const query = `INSERT INTO posts (userID, title, content, topic, purpose, datePosted, imageURL, videoURL) VALUES (?, ?, ?, ?, ?, NOW(), ?, ?)`;
+    db.query(query, [userId, title, content, topic, purpose, imageURL, videoURL], (err, result) => {
+        if (err) {
+            console.error('Lỗi khi thêm bài viết mới:', err);
+            res.status(500).json({ message: 'Lỗi máy chủ nội bộ' });
+        } else {
+            res.status(200).json({ message: 'Bài viết đã được thêm thành công' });
+        }
+    });
+});
+
+
+// Bài viết gần nhất
+app.get('/api/recent-posts', (req, res) => {
+    // Lấy thời gian hiện tại của yêu cầu
+    const requestTime = new Date();
+
+    const query = `SELECT post_id, username, avatarUrl, title, topic, purpose, likeCount, datePosted 
+                FROM posts 
+                JOIN users ON posts.userID = users.id 
+                ORDER BY datePosted DESC 
+                LIMIT 10`;
+
+    db.query(query, (err, results) => {
+        if (err) {
+            console.error('Lỗi khi truy vấn cơ sở dữ liệu:', err);
+            return res.status(500).json({ error: 'Lỗi máy chủ nội bộ' });
+        }
+        res.json({
+            data: results,
+            requestTime: requestTime // Gửi thời điểm yêu cầu
+        });
+    });
+});
+
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);
 });

@@ -16,8 +16,6 @@ const CreatePost = () => {
         videoURL: null
     });
 
-    const [selectedFile, setSelectedFile] = useState(null);
-
     const topics = [
         'Lạm dụng, nghiện các chất',
         'Căng thẳng & Kiệt quệ tinh thần',
@@ -26,7 +24,7 @@ const CreatePost = () => {
         'Các mối quan hệ bạn bè, gia đình, xã hội',
         'Độc thân & Các mối quan hệ tình cảm',
         'Công việc, tiền bạc, tài chính',
-        'Các vấn đề liên quan đến trẻ em',
+        'Trẻ em và trẻ vị thành niên',
         'Trường học và học tập',
         'Tự tử & Tự làm hại bản thân',
         'Tình dục & LGBT',
@@ -57,12 +55,60 @@ const CreatePost = () => {
     };
 
     const handleFileChange = (e) => {
-        setSelectedFile(e.target.files[0]);
+        const files = Array.from(e.target.files);
+        const imageFiles = files.filter(file => file.type.startsWith('image/'));
+        const videoFiles = files.filter(file => file.type.startsWith('video/'));
+
+        // Chỉ lấy ảnh đầu tiên từ danh sách các tệp ảnh
+        if (imageFiles.length > 0) {
+            // Gán imageURL cho ảnh đầu tiên
+                setPostData({
+                    ...postData,
+                    imageURL: imageFiles[0]
+                });
+            }
+        
+
+        // Chỉ lấy video đầu tiên từ danh sách các tệp video
+        if (videoFiles.length > 0) {
+            // Gán videoURL cho video đầu tiên        
+            setPostData({
+                ...postData,
+                videoURL: videoFiles[0]
+            });
+            
+        }
     };
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        alert("Bạn đã đăng bài viết thành công !")
+        const currentTime = getCurrentTime();
+        // Thêm thời gian vào đối tượng postData
+        setPostData({
+            ...postData,
+            time: currentTime
+        });
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/add-post', postData);
+            if (response.status === 200) {
+                alert("Bài viết đã được đăng thành công!");
+                // Đặt lại trạng thái postData để xóa dữ liệu đã nhập sau khi đăng bài thành công
+                setPostData({
+                    title: '',
+                    content: '',
+                    topic: '',
+                    purpose: '',
+                    time: '',
+                    imageURL: null, 
+                    videoURL: null
+                });
+            }
+        } catch (error) {
+            console.error('Lỗi khi đăng bài viết:', error);
+            alert("Đã xảy ra lỗi khi đăng bài viết. Vui lòng thử lại sau!");
+        }
     };
     
     return (
@@ -110,7 +156,7 @@ const CreatePost = () => {
 
                         <div className="post-upload">
                             <label htmlFor="file">Đăng tải ảnh hoặc video nếu có:</label>
-                            <input type="file" id="post-file" name="file" accept="image/*, video/*" onChange={handleFileChange} />
+                            <input type="file" id="post-file" name="file" accept="image/*, video/*" multiple onChange={handleFileChange}/>
                         </div>
                         
                         <button className="submit-post" type="submit">Đăng bài</button>
