@@ -4,6 +4,7 @@ import Search from "./Search";
 import RecentActivity from "./RecentActivity";
 import NavBar from "./NavBar";
 import axios from "axios";
+import Profile from "./Profile";
 
 const CreatePost = () => {
     const [postData, setPostData] = useState({
@@ -165,6 +166,10 @@ const CreatePost = () => {
             </div>
 
             <div className="right-content">
+                <div className="user-info">
+                    <Profile />
+                </div>
+
                 <div className="search">
                     <Search />
                 </div>
