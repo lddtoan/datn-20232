@@ -11,7 +11,7 @@ function Profile() {
       if (!token) return;
 
       try {
-        const response = await axios.get('http://localhost:8080/api/protected-route', {
+        const response = await axios.get('http://localhost:8080/api/user-info', {
           headers: {
             Authorization: `Bearer ${token}`
           }
@@ -25,16 +25,18 @@ function Profile() {
     fetchProfile();
   }, []);
 
-  if (!profile) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="profile">
-        <h1>Profile</h1>
-        <p><strong>Username:</strong> {profile.username}</p>
-        <p><strong>Full Name:</strong> {profile.fullname}</p>
-        <img src={profile.avatarUrl} alt="Avatar" />
+      {!profile ? (
+        <div className='loading'>Loading...</div>
+      ) : (
+        <div className='user-brief-infor'>
+          <h1>Profile</h1>
+          <p><strong>Username:</strong> {profile.username}</p>
+          <p><strong>Full Name:</strong> {profile.fullname}</p>
+          <img src={profile.avatarUrl} alt="Avatar" />
+        </div>
+      )}
     </div>
   );
 }

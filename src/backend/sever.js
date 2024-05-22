@@ -39,36 +39,47 @@ app.post('/api/login', (req, res) => {
     const { usernameOrEmail, password } = req.body;
 
     // Kiểm tra xem usernameOrEmail có phải là username hay email
-    const query = `SELECT id, username, email, fullname, dob, gender, address, avatarUrl FROM users WHERE (username = ? OR email = ?) AND password = ?`;
+    const query = `
+        SELECT 
+            users.id, users.username, users.email, users.fullname, users.dob, 
+            users.gender, users.address, users.avatarUrl, 
+            userStats.totalPosts, userStats.totalComments, userStats.totalLikes, userStats.totalUnlikes 
+        FROM users 
+        LEFT JOIN userStats ON users.id = userStats.userID 
+        WHERE (users.username = ? OR users.email = ?) AND users.password = ?`;
     db.query(query, [usernameOrEmail, usernameOrEmail, password], (err, result) => {
         if (err) {
             console.error('Lỗi kết nối tới cơ sở dữ liệu:', err);
             res.status(500).json('Lỗi máy chủ nội bộ');
         } else if (result.length > 0) {
-                const user = result[0];
-                console.log('Người dùng đăng nhập thành công :', usernameOrEmail);
-                // Tạo jwt 
-                const token = jwt.sign({
+            const user = result[0];
+            console.log('Người dùng đăng nhập thành công :', usernameOrEmail);
+            // Tạo jwt 
+            const token = jwt.sign({
+                id: user.id,
+                username: user.username,
+                fullname: user.fullname,
+                avatarUrl: user.avatarUrl
+            }, jwt_secret, { expiresIn: '3h' });
+            // Trả về token và thông tin người dùng
+            return res.status(200).json({ 
+                message: 'Đăng nhập thành công !',
+                token: token,
+                user: {
                     id: user.id,
                     username: user.username,
                     fullname: user.fullname,
-                    avatarUrl: user.avatarUrl
-                }, jwt_secret, { expiresIn: '3h' })
-                // Trả về token và thông tin người dùng
-                return res.status(200).json({ 
-                    message: 'Đăng nhập thành công !',
-                    token: token,
-                    user: {
-                        id: user.id,
-                        username: user.username,
-                        fullname: user.fullname,
-                        avatarUrl: user.avatarUrl
-                    }
-                });
-            } else {
-                console.log('Sai tên đăng nhập hoặc mật khẩu');
-                res.status(401).json('Sai tên đăng nhập hoặc mật khẩu');
-            }
+                    avatarUrl: user.avatarUrl,
+                    totalPosts: user.totalPosts,
+                    totalComments: user.totalComments,
+                    totalLikes: user.totalLikes,
+                    totalUnlikes: user.totalUnlikes
+                }
+            });
+        } else {
+            console.log('Sai tên đăng nhập hoặc mật khẩu');
+            res.status(401).json('Sai tên đăng nhập hoặc mật khẩu');
+        }
     });
 });
 
@@ -90,6 +101,47 @@ const authenticateJWT = (req, res, next) => {
         res.status(401).json({ message: 'Token không được cung cấp' });
     }
 };
+
+// Endpoint để lấy thông tin người dùng
+app.get('/api/user-info', authenticateJWT, (req, res) => {
+    const userID = req.user.id;
+
+    const query = `
+        SELECT 
+            users.id, users.username, users.email, users.fullname, users.dob, 
+            users.gender, users.address, users.avatarUrl, 
+            userStats.totalPosts, userStats.totalComments, userStats.totalLikes, userStats.totalUnlikes 
+        FROM users 
+        LEFT JOIN userStats ON users.id = userStats.userID 
+        WHERE users.id = ?`;
+
+    db.query(query, [userID], (err, result) => {
+        if (err) {
+            console.error('Lỗi kết nối tới cơ sở dữ liệu:', err);
+            res.status(500).json('Lỗi máy chủ nội bộ');
+        } else if (result.length > 0) {
+            const user = result[0];
+            res.status(200).json({ 
+                user: {
+                    id: user.id,
+                    username: user.username,
+                    email: user.email,
+                    fullname: user.fullname,
+                    dob: user.dob,
+                    gender: user.gender,
+                    address: user.address,
+                    avatarUrl: user.avatarUrl,
+                    totalPosts: user.totalPosts,
+                    totalComments: user.totalComments,
+                    totalLikes: user.totalLikes,
+                    totalUnlikes: user.totalUnlikes
+                }
+            });
+        } else {
+            res.status(404).json('Không tìm thấy thông tin người dùng');
+        }
+    });
+});
 
 // Sử dụng middleware cho các route cần bảo vệ
 app.get('/api/protected-route', authenticateJWT, (req, res) => {

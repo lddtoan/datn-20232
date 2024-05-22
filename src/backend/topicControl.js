@@ -47,7 +47,7 @@ router.get('/:topic', (req, res) => {
   `;
   db.query(query, [topic], (err, results) => {
     if (err) {
-      console.error('Lỗi truy xuất mã SQL: ' + err);
+      console.error('Lỗi truy xuất mã SQL: ' + error);
       res.status(500).json({ error: 'Failed to execute query' });
     } else {
       res.json(results);
