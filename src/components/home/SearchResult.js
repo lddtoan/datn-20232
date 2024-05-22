@@ -14,7 +14,7 @@ const SearchResult = ({ searchResults, keyword }) => {
 
         <div className="left-content">
             <div className='search-result'>
-                <h3>Kết quả tìm kiếm cho "{keyword}":</h3>
+                <h3 id='search-keyword'>Kết quả tìm kiếm cho "{keyword}" :</h3>
                 {searchResults.length > 0 ? (
                     <table className="search-result-table">
                         <thead>
