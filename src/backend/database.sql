@@ -9,8 +9,8 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     fullname VARCHAR(255) NOT NULL,
     dob DATE NOT NULL,
-    gender ENUM('Male', 'Female', 'Other') NOT NULL,
-    address TEXT NOT NULL, 
+    gender ENUM('Nam', 'Nữ', 'Khác') NOT NULL,
+    address TEXT, 
     avatarUrl VARCHAR(255)
 );
 

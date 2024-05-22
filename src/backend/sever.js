@@ -159,7 +159,16 @@ app.post('/api/add-post', authenticateJWT, (req, res) => {
             console.error('Lỗi khi thêm bài viết mới:', err);
             res.status(500).json({ message: 'Lỗi máy chủ nội bộ' });
         } else {
-            res.status(200).json({ message: 'Bài viết đã được thêm thành công' });
+             // Update user's totalPosts
+             const updateUserStatsQuery = `UPDATE userStats SET totalPosts = totalPosts + 1 WHERE userID = ?`;
+             db.query(updateUserStatsQuery, [userId], (err, result) => {
+                 if (err) {
+                     console.error('Lỗi cập nhật bài viết :', err);
+                     res.status(500).json('Lỗi máy chủ nội bộ');
+                 } else {
+                     res.status(200).json('Bài viết đã được đăng thành công!');
+                 }
+             });
         }
     });
 });

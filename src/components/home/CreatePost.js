@@ -91,7 +91,7 @@ const CreatePost = () => {
         });
 
         try {
-            const response = await axios.post('http://localhost:8080/api/add-post', postData);
+            const response = await axios.post('http://localhost:8080/api/logins', postData);
             if (response.status === 200) {
                 alert("Bài viết đã được đăng thành công!");
                 // Đặt lại trạng thái postData để xóa dữ liệu đã nhập sau khi đăng bài thành công
