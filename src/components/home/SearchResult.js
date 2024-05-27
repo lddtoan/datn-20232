@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NavBar from "../NavBar";
-import Search from "../Search";
-import RecentActivity from "../RecentActivity";
+import NavBar from "./NavBar";
+import Search from "./Search";
+import RecentActivity from "./RecentActivity";
 // import './SearchResult.css';
 
 const SearchResult = ({ searchResults, keyword }) => {
