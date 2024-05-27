@@ -163,7 +163,7 @@ app.post('/api/add-post', authenticateJWT, (req, res) => {
              const updateUserStatsQuery = `UPDATE userStats SET totalPosts = totalPosts + 1 WHERE userID = ?`;
              db.query(updateUserStatsQuery, [userId], (err, result) => {
                  if (err) {
-                     console.error('Lỗi cập nhật bài viết :', err);
+                     console.error('Lỗi cập nhật bài viết c:', err);
                      res.status(500).json('Lỗi máy chủ nội bộ');
                  } else {
                      res.status(200).json('Bài viết đã được đăng thành công!');
@@ -197,7 +197,37 @@ app.get('/api/recent-posts', (req, res) => {
 });
 
 // API endpoint để lấy thông tin bài viết theo chủ đề
-app.use('/api/:topic', topicRoutes);
+app.use('/api/topic', topicRoutes);
+
+
+// API endpoint để tìm kiếm bài viết theo từ khoá
+app.get('/search', (req, res) => {
+    let keyword = req.query.keyword;
+  
+    if (!keyword || typeof keyword !== 'string') {
+      return res.status(400).json({ error: 'Thiếu hoặc không hợp lệ từ khóa tìm kiếm' });
+    }
+  
+    // Mã hóa từ khóa trước khi sử dụng
+    keyword = encodeURIComponent(keyword);
+  
+    const query = `
+      SELECT users.username, users.avatarUrl, posts.title, posts.topic, posts.purpose, 
+      posts.datePosted, posts.likeCount, posts.unlikeCount
+      FROM posts
+      JOIN users ON posts.userID = users.id
+      WHERE posts.content LIKE '%${keyword}%'
+    `;
+  
+    connection.query(query, (err, results) => {
+      if (err) {
+        console.error('Lỗi truy vấn cơ sở dữ liệu:', err);
+        return res.status(500).json({ error: 'Đã xảy ra lỗi' });
+      }
+      res.json(results);
+    });
+});
+    
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}`);

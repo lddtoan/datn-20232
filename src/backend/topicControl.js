@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
-const router = express.Router();
+const app = express();
 
 const db = mysql.createConnection({
     host: 'localhost',
@@ -8,50 +8,48 @@ const db = mysql.createConnection({
     password: '',
     database: 'datn'
 });
-db.connect();
 
-// Kết nối đến cơ sở dữ liệu
 db.connect((err) => {
-  if (err) {
-    console.error('Error connecting to MySQL: ' + err.stack);
-    return;
-  }
-  console.log('Connected to MySQL as id ' + db.threadId);
+    if (err) {
+        console.error('Lỗi kết nối đến MySQL: ' + err.stack);
+        return;
+    }
+    console.log('Connected to MySQL as id ' + db.threadId);
 });
 
-// API endpoint để lấy thông tin bài viết theo chủ đề
-router.get('/:topic', (req, res) => {
+// Route để lấy thông tin bài viết theo chủ đề
+app.get('/posts/:topic', (req, res) => {
   const topic = req.params.topic;
-  const query = `
+
+  const sql = `
     SELECT 
-      u.username, 
-      u.avatarUrl, 
-      p.title, 
-      p.purpose, 
-      p.likeCount, 
-      p.unlikeCount, 
-      p.datePosted, 
-      COUNT(c.comment_id) AS totalComments
+      users.username AS author_username,
+      users.avatarUrl AS author_avatar,
+      posts.title,
+      posts.purpose,
+      posts.likeCount,
+      posts.unlikeCount,
+      COUNT(comments.commentID) AS commentCount,
+      posts.datePosted
     FROM 
-      posts p
+      posts
     JOIN 
-      users u ON p.user_id = u.id
+      users ON posts.userID = users.id
     LEFT JOIN 
-      comments c ON p.post_id = c.post_id
+      comments ON posts.post_id = comments.postID
     WHERE 
-      p.topic = ?
+      posts.topic = ?
     GROUP BY 
-      p.post_id, u.username, u.avatarUrl, p.title, p.purpose, p.likeCount, p.unlikeCount, p.datePosted
+      posts.post_id
     ORDER BY 
-      p.datePosted DESC;
+      posts.datePosted DESC;
   `;
-  db.query(query, [topic], (err, results) => {
+
+  db.query(sql, [topic], (err, results) => {
     if (err) {
-      console.error('Lỗi truy xuất mã SQL: ' + error);
-      res.status(500).json({ error: 'Failed to execute query' });
-    } else {
-      res.json(results);
+      throw err;
     }
+    res.json(results);
   });
 });
 
